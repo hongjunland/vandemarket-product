@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
-public class ProductTest {
+class ProductTest {
     @Test
     @DisplayName("Product withId 성공")
     public void withIdTest(){
