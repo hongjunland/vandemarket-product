@@ -1,5 +1,6 @@
 package com.vandemarket.productservice.product.adapter.in.web;
 
+import com.vandemarket.productservice.common.SuccessApiResponse;
 import com.vandemarket.productservice.common.annotation.WebAdapter;
 import com.vandemarket.productservice.product.application.port.in.CreateProductUseCase;
 import com.vandemarket.productservice.product.application.port.in.GetProductListQuery;
@@ -22,30 +23,30 @@ class ProductController{
     private final CreateProductUseCase createProductUseCase;
     private final GetProductUseCase getProductUseCase;
     @PostMapping
-    public ResponseEntity<?> createProduct(@RequestBody ProductCreateRequest productCreateRequest){
+    public SuccessApiResponse<?> createProduct(@RequestBody ProductCreateRequest productCreateRequest){
         CreateProductCommand createProductCommand = CreateProductCommand.builder()
                 .name(productCreateRequest.getName())
                 .description(productCreateRequest.getDescription())
                 .price(productCreateRequest.getPrice())
                 .build();
         boolean result = createProductUseCase.createProduct(createProductCommand);
-        return ResponseEntity.ok(result);
+        return SuccessApiResponse.of(result);
     }
     @GetMapping("/{productId}")
-    public ResponseEntity<?> getProductById(@PathVariable Long productId){
+    public SuccessApiResponse<?> getProductById(@PathVariable Long productId){
         GetProductQuery query = GetProductQuery.builder()
                 .productId(productId)
                 .build();
         ProductResponse productResponse = getProductUseCase.getProduct(query);
-        return ResponseEntity.ok(productResponse);
+        return SuccessApiResponse.of(productResponse);
     }
     @GetMapping
-    public ResponseEntity<?> getProductList(@RequestParam String name){
+    public SuccessApiResponse<?> getProductList(@RequestParam String name){
         GetProductListQuery getProductListQuery = GetProductListQuery.builder()
                 .name(name)
                 .build();
         List<ProductResponse> responses = getProductUseCase.getProductList(getProductListQuery);
-        return ResponseEntity.ok(responses);
+        return SuccessApiResponse.of(responses);
     }
 
 }

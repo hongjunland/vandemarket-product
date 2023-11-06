@@ -1,5 +1,6 @@
 package com.vandemarket.productservice.product.adapter.in.web;
 
+import com.vandemarket.productservice.common.SuccessApiResponse;
 import com.vandemarket.productservice.product.adapter.in.web.request.ProductCreateRequest;
 import com.vandemarket.productservice.product.adapter.in.web.response.ProductResponse;
 import com.vandemarket.productservice.product.application.port.in.CreateProductUseCase;
@@ -55,11 +56,11 @@ class ProductControllerTest {
         when(getProductUseCase.getProduct(any(GetProductQuery.class))).thenReturn(productResponse);
 
         // when
-        ResponseEntity<?> response = productController.getProductById(productId);
+        SuccessApiResponse<?> response = productController.getProductById(productId);
 
         //then
         verify(getProductUseCase, times(1)).getProduct(any(GetProductQuery.class));
-        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
     }
     
     @DisplayName("상품 목록 조회 성공")
@@ -69,10 +70,10 @@ class ProductControllerTest {
         String name = "IPhone";
         when(getProductUseCase.getProduct(any())).thenReturn(any());
         //when
-        ResponseEntity<?> response = productController.getProductList(name);
+        SuccessApiResponse<?> response = productController.getProductList(name);
         //then
         verify(getProductUseCase, times(1)).getProductList(any(GetProductListQuery.class));
-        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
     }
 
 }
