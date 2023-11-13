@@ -10,6 +10,7 @@ import lombok.Value;
 @AllArgsConstructor
 @Builder
 public class CreateProductCommand {
+    private Long writer;
     private String name;
     private String description;
     private int price;

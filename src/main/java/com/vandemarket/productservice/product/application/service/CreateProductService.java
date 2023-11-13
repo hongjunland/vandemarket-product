@@ -15,7 +15,9 @@ class CreateProductService implements CreateProductUseCase {
     private final CreateProductPort createProductPort;
     @Override
     public boolean createProduct(CreateProductCommand createProductCommand) {
-        Product product = Product.withoutId(createProductCommand.getName(),
+        Product product = Product.withoutId(
+                createProductCommand.getWriter(),
+                createProductCommand.getName(),
                 createProductCommand.getDescription(),
                 createProductCommand.getPrice());
         return createProductPort.createProduct(product);

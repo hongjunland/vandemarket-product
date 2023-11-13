@@ -19,6 +19,7 @@ class ProductLoadPersistenceAdapter implements LoadProductPort {
         ProductJpaEntity productJpaEntity = springDataProductRepository.findById(query.getProductId()).orElse(null);
         return ProductResponse.builder()
                 .id(productJpaEntity.getId())
+                .writer(productJpaEntity.getWriter())
                 .name(productJpaEntity.getName())
                 .description(productJpaEntity.getDescription())
                 .price(productJpaEntity.getPrice())
@@ -32,6 +33,7 @@ class ProductLoadPersistenceAdapter implements LoadProductPort {
                 .map((entity) ->
                     ProductResponse.builder()
                             .id(entity.getId())
+                            .writer(entity.getWriter())
                             .name(entity.getName())
                             .description(entity.getDescription())
                             .price(entity.getPrice())

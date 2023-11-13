@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @WebAdapter
@@ -23,8 +24,9 @@ class ProductController{
     private final CreateProductUseCase createProductUseCase;
     private final GetProductUseCase getProductUseCase;
     @PostMapping
-    public SuccessApiResponse<?> createProduct(@RequestBody ProductCreateRequest productCreateRequest){
+    public SuccessApiResponse<?> createProduct(@RequestBody ProductCreateRequest productCreateRequest, @RequestHeader("X-User-ID") String userId){
         CreateProductCommand createProductCommand = CreateProductCommand.builder()
+                .writer(Long.parseLong(userId))
                 .name(productCreateRequest.getName())
                 .description(productCreateRequest.getDescription())
                 .price(productCreateRequest.getPrice())

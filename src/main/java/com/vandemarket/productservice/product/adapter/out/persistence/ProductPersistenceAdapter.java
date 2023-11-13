@@ -12,6 +12,7 @@ class ProductPersistenceAdapter implements CreateProductPort {
     @Override
     public boolean createProduct(Product product) {
         ProductJpaEntity productJpaEntity = ProductJpaEntity.builder()
+                .writer(product.getWriter())
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())

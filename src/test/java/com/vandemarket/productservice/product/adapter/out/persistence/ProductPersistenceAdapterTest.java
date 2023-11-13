@@ -21,7 +21,7 @@ class ProductPersistenceAdapterTest {
     @Test
     @DisplayName("상품 등록 성공")
     public void createProductTest(){
-        Product product = Product.withoutId("IPhone 13","상태 좋음 아무나 사셈", 30000);
+        Product product = Product.withoutId(1L, "IPhone 13","상태 좋음 아무나 사셈", 30000);
         when(springDataProductRepository.save(any(ProductJpaEntity.class))).thenReturn(any());
         // when
         productPersistenceAdapter.createProduct(product);

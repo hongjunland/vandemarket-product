@@ -6,6 +6,7 @@ import lombok.Value;
 @Value
 @EqualsAndHashCode(callSuper = false)
 public class ProductCreateRequest{
+    private Long writer;
     private String name;
     private String description;
     private int price;

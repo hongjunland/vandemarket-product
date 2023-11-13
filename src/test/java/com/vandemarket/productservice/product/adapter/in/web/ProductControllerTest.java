@@ -33,10 +33,10 @@ class ProductControllerTest {
     @DisplayName("상품 등록 성공")
     @Test
     public void createProductTest(){
-        ProductCreateRequest productCreateRequest = new ProductCreateRequest("IPhone 11", "3년됬음",300000);
+        ProductCreateRequest productCreateRequest = new ProductCreateRequest(1L, "IPhone 11", "3년됬음",300000);
         when(createProductUseCase.createProduct(any(CreateProductCommand.class))).thenReturn(true);
         // when
-        productController.createProduct(productCreateRequest);
+        productController.createProduct(productCreateRequest, "1");
         // then
         verify(createProductUseCase, times(1)).createProduct(any(CreateProductCommand.class));
 
@@ -49,6 +49,7 @@ class ProductControllerTest {
         Long productId = 1L;
         ProductResponse productResponse = ProductResponse.builder()
                 .id(productId)
+                .writer(1L)
                 .name("IPhone 11")
                 .description("3년됬음")
                 .price(3000000)

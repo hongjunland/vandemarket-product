@@ -14,13 +14,15 @@ class ProductTest {
     @DisplayName("Product withId 성공")
     public void withIdTest(){
         Long id = 12L;
+        Long writer = 1L;
         String name = "IPhone 12";
         String description = "테스트용 아이폰입니다";
         int price = 30000;
-        Product product = Product.withId(new Product.ProductId(id), name, description, price);
+        Product product = Product.withId(new Product.ProductId(id), writer, name, description, price);
 
         assertAll("product2",
                 ()-> assertEquals(id, product.getId().getValue()),
+                ()-> assertEquals(writer, product.getWriter()),
                 ()-> assertEquals(name, product.getName()),
                 ()-> assertEquals(description, product.getDescription()),
                 ()-> assertEquals(price, product.getPrice())
@@ -31,10 +33,12 @@ class ProductTest {
     public void withoutIdTest(){
         String name = "IPhone 12";
         String description = "테스트용 아이폰입니다";
+        Long writer = 1L;
         int price = 30000;
-        Product product = Product.withoutId(name, description, price);
+        Product product = Product.withoutId(writer, name, description, price);
 
         assertAll("product2",
+                ()-> assertEquals(writer, product.getWriter()),
                 ()-> assertEquals(name, product.getName()),
                 ()-> assertEquals(description, product.getDescription()),
                 ()-> assertEquals(price, product.getPrice())

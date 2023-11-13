@@ -20,6 +20,7 @@ public class ProductJpaEntity {
     @Id
     @GeneratedValue
     private Long id;
+    private Long writer;
     private String name;
     private String description;
     private int price;

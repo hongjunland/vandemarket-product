@@ -34,6 +34,7 @@ class ProductLoadPersistenceAdapterTest {
                 .build();
         Optional<ProductJpaEntity> productJpaEntity = Optional.of(ProductJpaEntity.builder()
                 .id(targetId)
+                .writer(1L)
                 .name("IPhone 12")
                 .description("아이폰 상태좋음 S급")
                 .price(300000)
@@ -41,6 +42,7 @@ class ProductLoadPersistenceAdapterTest {
         ProductResponse expectedResponse = ProductResponse.builder()
                 .id(targetId)
                 .name(productJpaEntity.get().getName())
+                .writer(productJpaEntity.get().getWriter())
                 .description(productJpaEntity.get().getDescription())
                 .price(productJpaEntity.get().getPrice())
                 .build();
@@ -62,12 +64,14 @@ class ProductLoadPersistenceAdapterTest {
         List<ProductJpaEntity> productJpaEntityList = Arrays.asList(
                 ProductJpaEntity.builder()
                         .id(1L)
+                        .writer(1L)
                         .name("IPhone 12")
                         .description("아이폰 상태좋음 S급")
                         .price(300000)
                         .build(),
                 ProductJpaEntity.builder()
                         .id(2L)
+                        .writer(2L)
                         .name("IPhone 13")
                         .description("아이폰 상태좋음 S급")
                         .price(300000)
